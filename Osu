@@ -1,0 +1,50 @@
+#include <iostream>
+#include <cstdlib> // for rand() and srand()
+#include <ctime>   // for time()
+
+// Define some constants for the teams and the number of quarters in the game
+const int MICHIGAN = 0;
+const int OHIO_STATE = 1;
+const int NUM_QUARTERS = 4;
+
+// Define some constants for the possible outcomes of a play
+const int TOUCHDOWN = 6;
+const int FIELD_GOAL = 3;
+const int SAFETY = 2;
+const int INCOMPLETE_PASS = 0;
+const int INTERCEPTION = -2;
+
+int main() {
+  // Initialize the random number generator
+  srand(time(nullptr));
+
+  // Declare variables for the score, the current quarter, and the ball possession
+  int score[2] = {0, 0};
+  int quarter = 1;
+  int possession = MICHIGAN;
+
+  // Loop through the quarters of the game
+  for (int i = 0; i < NUM_QUARTERS; i++) {
+    std::cout << "Starting quarter " << quarter << std::endl;
+
+    // Loop until the end of the quarter
+    while (true) {
+      std::cout << "Team " << possession << " is in possession of the ball" << std::endl;
+
+      // Generate a random number to simulate the outcome of the play
+      int outcome = rand() % 6;
+
+      // Determine the outcome of the play and update the score accordingly
+      if (outcome == TOUCHDOWN) {
+        score[possession] += 6;
+        std::cout << "Touchdown! The score is now " << score[MICHIGAN] << " to " << score[OHIO_STATE] << std::endl;
+      } else if (outcome == FIELD_GOAL) {
+        score[possession] += 3;
+        std::cout << "Field goal! The score is now " << score[MICHIGAN] << " to " << score[OHIO_STATE] << std::endl;
+      } else if (outcome == SAFETY) {
+        score[possession] += 2;
+        std::cout << "Safety! The score is now " << score[MICHIGAN] << " to " << score[OHIO_STATE] << std::endl;
+      } else if (outcome == INCOMPLETE_PASS) {
+        std::cout << "Incomplete pass" << std::endl;
+      } else if (outcome == INTERCEPTION) {
+        std::cout << "Interception
